@@ -11,7 +11,7 @@ OVER="\\r\\033[K"
 
 #CONFIG
 PASS_RESULTS='NULL'
-RAW_GIT=https://raw.githubusercontent.com/okfsoft/openlitespeed-autoinstall-centos7/master
+RAW_GIT=https://raw.githubusercontent.com/HaziFlorinMarian/openlitespeed-autoinstall-centos7/master
 WEB_DIR=/usr/local/lsws
 
 #Password Generator
