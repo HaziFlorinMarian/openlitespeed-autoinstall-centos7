@@ -230,7 +230,7 @@ if [[ ("$STARTINSTALL" == "y" || "$STARTINSTALL" == "Y") ]]; then
 
 cat << EOT > /home/defaultdomain/html/index.php
 <?php
-echo "https://www.okflash.net - Web Base Its Works!";
+echo "www.hazi.ro - PHP successfully installed!";
 ?>
 EOT
 
