@@ -173,7 +173,7 @@ clear
 if [[ ("$STARTINSTALL" == "y" || "$STARTINSTALL" == "Y") ]]; then
 
 	yum -y install epel-release
-	yum -y install wget certbot openssl
+	yum -y install wget certbot openssl firewall-cmd
 	rpm -ivh http://rpms.litespeedtech.com/centos/litespeed-repo-1.1-1.el7.noarch.rpm
 	yum -y update
 	yum clean all
@@ -291,7 +291,7 @@ $PWD_SQL_DATABASE
 EOT
 
 # Create PHP symlink
-ln -s /usr/local/lsws/lsphp72/bin/lsphp /usr/bin/php
+ln -s /usr/local/lsws/$verphpinstall/bin/lsphp /usr/bin/php
 
 systemctl enable proftpd
 systemctl enable mariadb

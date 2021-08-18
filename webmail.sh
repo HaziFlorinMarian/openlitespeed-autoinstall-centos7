@@ -1,7 +1,10 @@
-#!/bin/bash
+# !/bin/bash
 
-# echo "Domain name (Without www):"
-# read DOMAIN
+RAW_GIT=https://raw.githubusercontent.com/HaziFlorinMarian/openlitespeed-autoinstall-centos7/master
+WEB_DIR=/usr/local/lsws
+
+echo "Domain name (Without www):"
+read DOMAIN
 
 # groupadd vmail -g 2222 
 # useradd vmail -r -g 2222 -u 2222 -d /var/vmail -m -c "mail user" 
@@ -136,8 +139,8 @@
 
 # CLEARPASSWORD=$(cat /dev/urandom | env LC_CTYPE=C tr -dc a-zA-Z0-9 | head -c 16; echo)
 
-# touch /root/.EmailPassword.txt
-# echo $CLEARPASSWORD >> /root/.EmailPassword.txt
+# touch .EmailPassword
+# echo $CLEARPASSWORD >> .EmailPassword
 
 # ENCRYPTEDPASSWORD=$(doveadm pw -s sha1 -p $CLEARPASSWORD | cut -d '}' -f2)
 
@@ -161,9 +164,27 @@
 # firewall-cmd --permanent --add-port=993/tcp
 # firewall-cmd --reload
 
-curl -L "http://sourceforge.net/projects/roundcubemail/files/latest/download?source=files" > /home/roundcube-latest.tar.gz
-tar -zxf /home/roundcube-latest.tar.gz -C /home
-rm /home/roundcube-latest.tar.gz
+# mkdir -p /home/roundcube/logs
+# curl -L "http://sourceforge.net/projects/roundcubemail/files/latest/download?source=files" > /home/roundcube/roundcube-latest.tar.gz
+# tar -zxf /home/roundcube/roundcube-latest.tar.gz -C /home/roundcube
+# rm /home/roundcube/roundcube-latest.tar.gz
+# mv /home/roundcube/roundcube* /home/roundcube/html
 
-##What's next?
-# Continue with folder renaming from roundube-* to rouncube
+MYSQL_PASSWORD=$(cat .MariaDB)
+
+# mysql -u root -p$MYSQL_PASSWORD << EOF
+# CREATE DATABASE IF NOT EXISTS roundcubemail;
+# GRANT ALL PRIVILEGES ON roundcubemail . * TO "roundcube"@"localhost" IDENTIFIED BY "$MYSQL_PASSWORD";
+# FLUSH PRIVILEGES;
+# quit
+# EOF
+
+# mysql -uroundcube -p$MYSQL_PASSWORD roundcubemail < /home/roundcube/html/SQL/mysql.initial.sql
+# cp /home/roundcube/html/config/config.inc.php.sample /home/roundcube/html/config/config.inc.php
+
+# sudo sed -i 's/roundcube:pass/roundcube:'"$MYSQL_PASSWORD"'/' /home/roundcube/html/config/config.inc.php
+
+
+
+
+/usr/local/lsws/bin/lswsctrl reload
