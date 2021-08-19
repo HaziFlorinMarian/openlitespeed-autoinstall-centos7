@@ -284,7 +284,7 @@ $PWD_SQL_DATABASE
 EOT
 
 # Create PHP symlink
-ln -s /usr/local/lsws/$verphpinstall/bin/lsphp /usr/bin/php
+ln -s /usr/local/lsws/lsphp$verphpinstall/bin/lsphp /usr/bin/php
 
 systemctl enable proftpd
 systemctl enable mariadb
