@@ -256,6 +256,7 @@ openssl req -sha256 -new -key $WEB_DIR/conf/cert/phpmyadmin/phpmyadmin.key -out 
 openssl x509 -req -sha256 -days 365 -in $WEB_DIR/conf/cert/phpmyadmin/phpmyadmin.csr -signkey $WEB_DIR/conf/cert/phpmyadmin/phpmyadmin.key -out $WEB_DIR/conf/cert/phpmyadmin/phpmyadmin.crt
 
 # Open port Needed in Firewall
+sudo systemctl start firewalld
 firewall-cmd --zone=public --permanent --add-port=21/tcp
 firewall-cmd --zone=public --permanent --add-port=80/tcp
 firewall-cmd --zone=public --permanent --add-port=443/tcp
