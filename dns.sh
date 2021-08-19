@@ -48,3 +48,9 @@ sudo sed -i 's/    604800/$TTL    604800/g' /etc/named/$DOMAIN_NAME.db
 systemctl enable named
 systemctl start named
 systemctl status named
+
+#Allow on Firewall
+sudo systemctl start firewalld
+firewall-cmd --zone=public --permanent --add-port=53/tcp
+firewall-cmd --zone=public --permanent --add-port=53/udp
+firewall-cmd --reload
