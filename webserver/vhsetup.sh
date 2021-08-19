@@ -70,10 +70,6 @@ show_help() {
         echoB "https://docs.litespeedtech.com/shared/cloud/OPT-LETSHTTPS/"
         echo ''
     ;;  
-    "3")
-        echo "Please make sure you have ${HM_PATH}/.db_password file with content:"
-        echoY 'root_mysql_pass="YOUR_DB_PASSWORD"'
-    ;;  
     esac
 }
 check_os() {
@@ -162,88 +158,9 @@ line_insert(){
         sed -i "${LINENUM}i${3}" ${2}
     fi  
 }
-install_wp_cli() {
-    if [ ! -e /usr/local/bin/wp ]; then
-        curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-        chmod +x wp-cli.phar
-        mv wp-cli.phar /usr/local/bin/wp
-    fi    
-    if [ ! -f /usr/bin/php ]; then
-        if [ -e ${LSDIR}/${PHPVER}/bin/php ]; then
-            ln -s ${LSDIR}/${PHPVER}/bin/php /usr/bin/php
-        else
-            echoR "${LSDIR}/${PHPVER}/bin/php not exist, please check your PHP version!"
-            exit 1 
-        fi        
-    fi      
-}
+
 gen_password(){
     ROOT_PASS=$(cat ${HM_PATH}/.db_password | head -n 1 | awk -F '"' '{print $2}')
-    WP_DB=$(echo "${MY_DOMAIN}" | sed -e 's/\.//g; s/-//g')
-    WP_USER=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8; echo '')
-    WP_PASS=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 48; echo '')
-}
-
-get_theme_name(){
-    THEME_NAME=$(grep WP_DEFAULT_THEME ${DOCHM}/wp-includes/default-constants.php | grep -v '!' | awk -F "'" '{print $4}')
-    echo "${THEME_NAME}" | grep 'twenty' >/dev/null 2>&1
-    if [ ${?} = 0 ]; then
-        THEME="${THEME_NAME}"
-    fi
-}
-
-set_lscache(){
-    if [ ! -f ${DOCHM}/wp-content/themes/${THEME}/functions.php.bk ]; then
-        cp ${DOCHM}/wp-content/themes/${THEME}/functions.php ${DOCHM}/wp-content/themes/${THEME}/functions.php.bk
-        install_ed
-        ed ${DOCHM}/wp-content/themes/${THEME}/functions.php <<END >>/dev/null 2>&1
-2i
-require_once( WP_CONTENT_DIR.'/../wp-admin/includes/plugin.php' );
-\$path = 'litespeed-cache/litespeed-cache.php' ;
-if (!is_plugin_active( \$path )) {
-  activate_plugin( \$path ) ;
-  rename( __FILE__ . '.bk', __FILE__ );
-}
-.
-w
-q
-END
-    fi
-}
-
-create_db_user(){
-    if [ -e ${HM_PATH}/.db_password ]; then
-        gen_password
-        mysql -uroot -p${ROOT_PASS} -e "create database ${WP_DB};"
-        if [ ${?} = 0 ]; then
-            mysql -uroot -p${ROOT_PASS} -e "CREATE USER '${WP_USER}'@'localhost' IDENTIFIED BY '${WP_PASS}';"
-            mysql -uroot -p${ROOT_PASS} -e "GRANT ALL PRIVILEGES ON * . * TO '${WP_USER}'@'localhost';"
-            mysql -uroot -p${ROOT_PASS} -e "FLUSH PRIVILEGES;"
-        else
-            echoR "something went wrong when create new database, please proceed to manual installtion."
-            DB_TEST=1
-        fi
-    else
-        echoR "No DataBase Password, skip!"  
-        DB_TEST=1
-        show_help 3
-    fi    
-}
-
-install_wp() {
-    create_db_user
-    if [ ${DB_TEST} = 0 ]; then
-        install_wp_cli
-        rm -f ${DOCHM}/index.php
-        export WP_CLI_CACHE_DIR=${WWW_PATH}/.wp-cli/
-        wp core download --path=${DOCHM} --allow-root --quiet
-        wp core config --dbname=${WP_DB} --dbuser=${WP_USER} --dbpass=${WP_PASS} \
-            --dbhost=localhost --dbprefix=wp_ --path=${DOCHM} --allow-root --quiet
-        get_theme_name
-        config_wp
-        change_owner
-        echoG "WP downloaded, please access your domain to complete the setup."    
-    fi
 }
 
 check_duplicate() {
@@ -354,7 +271,7 @@ set_server_conf() {
     fi
     echo "
 virtualhost ${TEMP_DOMAIN} {
-vhRoot                  ${WWW_PATH}/${MY_DOMAIN}
+vhRoot                  ${WWW_PATH}/${MY_DOMAIN}/html
 configFile              ${VHDIR}/${MY_DOMAIN}/vhconf.conf
 allowSymbolLink         1
 enableScript            1
