@@ -173,7 +173,7 @@ clear
 if [[ ("$STARTINSTALL" == "y" || "$STARTINSTALL" == "Y") ]]; then
 
 	yum -y install epel-release
-	yum -y install wget certbot openssl firewall-cmd
+	yum -y install wget certbot openssl firewalld
 	rpm -ivh http://rpms.litespeedtech.com/centos/litespeed-repo-1.1-1.el7.noarch.rpm
 	yum -y update
 	yum clean all
@@ -214,14 +214,7 @@ if [[ ("$STARTINSTALL" == "y" || "$STARTINSTALL" == "Y") ]]; then
 	chown lsadm:lsadm $WEB_DIR/conf/vhosts/defaultdomain/vhconf.conf
 	chown lsadm:lsadm $WEB_DIR/conf/httpd_config.conf
 	chown lsadm:lsadm $WEB_DIR/admin/conf/admin_config.conf
-	mkdir /webserver
-	wget -O /webserver/web_create $RAW_GIT/webserver/web_create
-	wget -O /webserver/web_remove $RAW_GIT/webserver/web_remove
-	wget -O /webserver/web_ssl $RAW_GIT/webserver/web_ssl
-	wget -O /webserver/web_createdb $RAW_GIT/webserver/web_createdb
-	wget -O /usr/bin/lsws $RAW_GIT/webserver/lsws
 	chmod +x /usr/bin/lsws
-	chmod +x /webserver/*
 	wget -O $WEB_DIR/conf/templates/incl.conf $RAW_GIT/templates/incl.conf
 	wget -O $WEB_DIR/conf/templates/vhconf.conf $RAW_GIT/templates/vhconf.conf
 	
