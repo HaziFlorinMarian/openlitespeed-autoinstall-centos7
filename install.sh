@@ -303,6 +303,23 @@ echo '* * * * *   root ( sleep 45 ; if ! find /home/*/html/ -maxdepth 2 -type f 
 echo '* * * * *   root ( sleep 50 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
 echo '* * * * *   root ( sleep 55 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
 
+install_ioncube() {
+  curl -L "https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz" > /tmp/ioncube_loaders_lin_x86-64.tar.gz
+  tar -zxf /tmp/ioncube_loaders_lin_x86-64.tar.gz -C /tmp
+  mv -v /tmp/ioncube/* /usr/local/lsws/lsphp73/lib64/php/modules
+  rm /tmp/ioncube_loaders_lin_x86-64.tar.gz
+  rm -rf /tmp/ioncube
+  touch /usr/local/lsws/lsphp73/etc/php.d/00-ioncube.ini
+  cat << EOT > /usr/local/lsws/lsphp73/etc/php.d/00-ioncube.ini
+zend_extension = /usr/local/lsws/lsphp73/lib64/php/modules/ioncube_loader_lin_7.3.so
+
+EOT
+}
+
+install_ioncube
+
+sudo /usr/local/lsws/bin/lswsctrl reload
+
 elif [[ ("$STARTINSTALL" == "n" || "$STARTINSTALL" == "N") ]]; then
 clear
 exit 1
