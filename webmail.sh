@@ -165,7 +165,7 @@ firewall-cmd --permanent --add-port=993/tcp
 firewall-cmd --reload
 
 mkdir -p /home/mail.$DOMAIN/logs
-curl -L "http://sourceforge.net/projects/roundcubemail/files/latest/download?source=files" > /home/mail.$DOMAIN/roundcube-latest.tar.gz
+curl -L "https://github.com/roundcube/roundcubemail/releases/download/1.4.11/roundcubemail-1.4.11-complete.tar.gz" > /home/mail.$DOMAIN/roundcube-latest.tar.gz
 tar -zxf /home/mail.$DOMAIN/roundcube-latest.tar.gz -C /home/mail.$DOMAIN
 rm /home/mail.$DOMAIN/roundcube-latest.tar.gz
 mv /home/mail.$DOMAIN/roundcube* /home/mail.$DOMAIN/html
