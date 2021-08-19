@@ -246,5 +246,5 @@ main(){
     endsetup
 }
 main
-rm -- "$0"
+# rm -- "$0"
 exit 0
