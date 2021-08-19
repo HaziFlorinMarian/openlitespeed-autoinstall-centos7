@@ -164,11 +164,11 @@ firewall-cmd --permanent --add-port=143/tcp
 firewall-cmd --permanent --add-port=993/tcp
 firewall-cmd --reload
 
-mkdir -p /home/roundcube/logs
-curl -L "http://sourceforge.net/projects/roundcubemail/files/latest/download?source=files" > /home/roundcube/roundcube-latest.tar.gz
-tar -zxf /home/roundcube/roundcube-latest.tar.gz -C /home/roundcube
-rm /home/roundcube/roundcube-latest.tar.gz
-mv /home/roundcube/roundcube* /home/roundcube/html
+mkdir -p /home/mail.$DOMAIN/logs
+curl -L "http://sourceforge.net/projects/roundcubemail/files/latest/download?source=files" > /home/mail.$DOMAIN/roundcube-latest.tar.gz
+tar -zxf /home/mail.$DOMAIN/roundcube-latest.tar.gz -C /home/mail.$DOMAIN
+rm /home/mail.$DOMAIN/roundcube-latest.tar.gz
+mv /home/mail.$DOMAIN/roundcube* /home/mail.$DOMAIN/html
 
 MYSQL_PASSWORD=$(cat /root/.MariaDB)
 
@@ -179,10 +179,10 @@ FLUSH PRIVILEGES;
 quit
 EOF
 
-mysql -uroundcube -p$MYSQL_PASSWORD roundcubemail < /home/roundcube/html/SQL/mysql.initial.sql
-cp /home/roundcube/html/config/config.inc.php.sample /home/roundcube/html/config/config.inc.php
+mysql -uroundcube -p$MYSQL_PASSWORD roundcubemail < /home/mail.$DOMAIN/html/SQL/mysql.initial.sql
+cp /home/mail.$DOMAIN/html/config/config.inc.php.sample /home/mail.$DOMAIN/html/config/config.inc.php
 
-sudo sed -i 's/roundcube:pass/roundcube:'"$MYSQL_PASSWORD"'/' /home/roundcube/html/config/config.inc.php
+sudo sed -i 's/roundcube:pass/roundcube:'"$MYSQL_PASSWORD"'/' /home/mail.$DOMAIN/html/config/config.inc.php
 
 
 
