@@ -164,6 +164,9 @@ firewall-cmd --permanent --add-port=143/tcp
 firewall-cmd --permanent --add-port=993/tcp
 firewall-cmd --reload
 
+#WARNING! THIS IS TEMPROARY SOLUTION, WE DELETE FOLDER CREATED WITH scripts/virtualhostsetup.sh because on this script it's missing OpenLiteSpeed virtual host configuration.
+rm -rf /home/mail.$DOMAIN
+
 mkdir -p /home/mail.$DOMAIN/logs
 curl -L "https://github.com/roundcube/roundcubemail/releases/download/1.4.11/roundcubemail-1.4.11-complete.tar.gz" > /home/mail.$DOMAIN/roundcube-latest.tar.gz
 tar -zxf /home/mail.$DOMAIN/roundcube-latest.tar.gz -C /home/mail.$DOMAIN
