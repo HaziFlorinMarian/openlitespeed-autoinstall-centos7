@@ -304,6 +304,20 @@ echo '* * * * *   root ( sleep 45 ; if ! find /home/*/html/ -maxdepth 2 -type f 
 echo '* * * * *   root ( sleep 50 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
 echo '* * * * *   root ( sleep 55 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
 
+# fix folder permissions
+echo '* * * * *   root ( sleep 0 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 5 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 10 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 15 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 20 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 25 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 30 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 35 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 40 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 45 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 50 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+echo '* * * * *   root ( sleep 55 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
+
 install_ioncube() {
   curl -L "https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz" > /tmp/ioncube_loaders_lin_x86-64.tar.gz
   tar -zxf /tmp/ioncube_loaders_lin_x86-64.tar.gz -C /tmp
