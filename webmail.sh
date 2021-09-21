@@ -6,6 +6,13 @@ WEB_DIR=/usr/local/lsws
 echo "Domain name (Without www):"
 read DOMAIN
 
+DIR="/home/mail.$DOMAIN"
+if [ ! -d "$DIR" ]; then
+  ###  Control will jump here if $DIR does NOT exists ###
+  echo "Error: ${DIR} not found. You have to call scripts/virtualhostsetup.sh first. (domain mail.$DOMAIN)"
+  exit 1
+fi
+
 groupadd vmail -g 2222 
 useradd vmail -r -g 2222 -u 2222 -d /var/vmail -m -c "mail user" 
 

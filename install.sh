@@ -291,18 +291,18 @@ systemctl enable proftpd
 systemctl enable mariadb
 
 # htaccess changes detection
-echo '* * * * *   root ( sleep 0 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 5 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 10 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 15 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 20 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 25 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 30 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 35 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 40 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 45 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 50 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
-echo '* * * * *   root ( sleep 55 ; if ! find /home/*/html/ -maxdepth 2 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 0 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 5 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 10 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 15 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 20 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 25 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 30 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 35 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 40 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 45 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 50 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
+echo '* * * * *   root ( sleep 55 ; if ! find /home/*/html/ -maxdepth 10 -type f -newer /usr/local/lsws/cgid -name ".htaccess" -exec false {} +; then /usr/local/lsws/bin/lswsctrl restart; fi )' >> /etc/cron.d/openlitespeed_htaccess_scan 
 
 # fix folder permissions
 echo '* * * * *   root ( sleep 0 ; chmod -R 777 /home )' >> /etc/cron.d/openlitespeed_fix_permissions 
